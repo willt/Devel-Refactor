@@ -1,4 +1,4 @@
-Devel/Refactor version 0.04
+Devel/Refactor version
 =========================
 
 The Devel::Refactor module is for code refactoring.  Pass it a
@@ -9,7 +9,7 @@ passed back.  It then produces the sub along with a call to
 the sub.
 
 Included in this module is an example script that pulls the
-snippet of code from the KDE clipboard in Linux and passes 
+snippet of code from the KDE clipboard in Linux and passes
 back the transformed code the same way.
 
 INSTALLATION
@@ -31,5 +31,5 @@ COPYRIGHT AND LICENCE
 Copyright (C) 2005 Scott Sotka
 
 This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself. 
+it under the same terms as Perl itself.
 

@@ -65,7 +65,7 @@ our @EXPORT = qw(
 	
 );
 
-our $VERSION = '0.05'; 
+our $VERSION = '0.06'; 
 
 our $DEBUG = 0;
 # Preloaded methods go here.
@@ -112,6 +112,7 @@ sub new {
         inner_retvals   => [],
         outer_retvals   => [],
         perl_file_extensions       => { %perl_file_extensions },
+	class		=> 0,
     };
 
     bless $self, $class;
@@ -452,6 +453,12 @@ sub _parse_vars {
 
         $var  = $1;
         $hint = $2;
+	next if $var =~ qr/^(\$_)$/;
+	if ($var =~ qr/^(\$self|\$this|\$class|\$_)$/) {
+	    $self->{class} = $1;
+	    next;
+	}
+
         if ( $hint =~ /^{/ ) {    #}/ 
             $var =~ s/\$/\%/;
             $self->{hash_vars}->{$var}++;
@@ -610,12 +617,18 @@ sub _transform_snippet {
     
     $return_call .= "my (";
     $return_call .= join ', ', map {my $tmp; ($tmp = $_) =~ s/[\@\%](.*)/\$$1/; $tmp} sort @{$self->{outer_retvals}};
-    $return_call .= ") = ".$self->{sub_name}." (";
+    $return_call .= ") = ";
+    $return_call .= $self->{class} ? "$self->{class}->" . $self->{sub_name} : $self->{sub_name};
+    $return_call .= "(";
+
     $return_call .= join ', ',
          map { ( $tmp = $_ ) =~ s/(\%|\@)(.*)/\\$1$2/; $tmp } @{$self->{parms}};
     $return_call .= ");\n";
     
     $retval  = "sub ".$self->{sub_name}." {\n";
+    if ($self->{class}) {
+        $retval .= "    my $self->{class} = shift;\n";
+    }
     $retval .= join '', map {($tmp = $_) =~ tr/%@/$/; "    my $tmp = shift;\n" } @{$self->{parms}};
     $retval .= "\n" . $self->{code_snippet};
     $retval .= "\n    return (";

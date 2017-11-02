@@ -1,5 +1,9 @@
 Revision history for Perl extension Devel::Refactor.
 
+0.6 Thu Nov 2 09:00:00 PST 2017
+    + added support to extract a method by detecting use of $self,$this, or $class
+    + extracting a sub/method now ignores $_ as a variable
+
 0.5 Thu March 17 14:47:00 PST 2005
     + Fixed example/factory.pl to work with latest version of Refactor.
 

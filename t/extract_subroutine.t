@@ -41,7 +41,7 @@ if ($verbose) {
 }
 
 # Check return values
-my $expected_result = 'my ($date, $hash, $results) = newSub (\@array);';
+my $expected_result = 'my ($date, $hash, $results) = newSub(\@array);';
 my $result = $new_sub_call;
 chop $result; # remove newline, just to make diagnostic message prettier.
 ok ($result eq $expected_result, 'New subroutine signature') or
