@@ -462,7 +462,7 @@ sub _parse_vars {
         if ( $hint =~ /^{/ ) {    #}/ 
             $var =~ s/\$/\%/;
             $self->{hash_vars}->{$var}++;
-        } elsif ( $hint =~ /^\[>/ ) {
+        } elsif ( $hint =~ /^\[/ ) {
             $var =~ s/\$/\@/;
             $self->{array_vars}->{$var}++;
         } elsif ( $var =~ /^\@/ ){
