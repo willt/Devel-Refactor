@@ -450,7 +450,6 @@ sub _parse_vars {
 
     # find the variables
     while ( $self->{code_snippet} =~ /([\$\@]\w+?)(\W)/g ) {
-
         $var  = $1;
         $hint = $2;
 	next if $var =~ qr/^(\$_)$/;
