@@ -449,7 +449,7 @@ sub _parse_vars {
     my $hint;
 
     # find the variables
-    while ( $self->{code_snippet} =~ /([\$\@]\w+?)(\W\W)/g ) {
+    while ( $self->{code_snippet} =~ /([\$\@]\w+?)(\W\W)/g ) { # \W\W misses $foo{bar}{foo}
 
         $var  = $1;
         $hint = $2;
