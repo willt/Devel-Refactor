@@ -460,10 +460,10 @@ sub _parse_vars {
             $var  = $1;
             $hint = $2;
 
-            next if $var =~ qr/^(\$_)$/; # skip
+            next if $var =~ qr/^\$_$/; # skip
             # if we match here we assume we are in a package
             # and will extract method instead of a sub
-            if ($var =~ qr/^(\$self|\$this|\$class|\$_)$/) {
+            if ($var =~ qr/^(\$self|\$this|\$class)$/) {
                 $self->{class} = $1;
                 next;
             }
